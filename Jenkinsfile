@@ -59,8 +59,8 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
                        sh "docker build -t hotstar ."
-                       sh "docker tag hotstar sevenajay/hotstar:latest "
-                       sh "docker push sevenajay/hotstar:latest"
+                       sh "docker tag hotstar sonbarse17/hotstar:latest "
+                       sh "docker push sonbarse17/hotstar:latest"
                     }
                 }
             }
@@ -69,16 +69,16 @@ pipeline{
             steps {
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh 'docker scout quickview sevenajay/hotstar:latest'
-                       sh 'docker scout cves sevenajay/hotstar:latest'
-                       sh 'docker scout recommendations sevenajay/hotstar:latest'
+                       sh 'docker scout quickview sonbarse17/hotstar:latest'
+                       sh 'docker scout cves sonbarse17/hotstar:latest'
+                       sh 'docker scout recommendations sonbarse17/hotstar:latest'
                    }
                 }
             }
         }
         stage("deploy_docker"){
             steps{
-                sh "docker run -d --name hotstar -p 3000:3000 sevenajay/hotstar:latest"
+                sh "docker run -d --name hotstar -p 3000:3000 sonbarse17/hotstar:latest"
             }
         }
     }
